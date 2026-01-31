@@ -1,7 +1,7 @@
 
 
 struct Item {
-    id: i32
+    id: i32,
     name: String,
     price: f32,
     description: String
@@ -12,13 +12,26 @@ struct ItemsBank {
 }
 
 impl ItemsBank {
-    pub fn new -> Self {
-        // generate the bank here
-        Self
+    pub fn new() -> Self {
+        let mut items = Vec::new();
+        let mut counter = 0;
+        for i in 1..100{
+            let name = format!("{ } - Item", counter);
+            let newItem = Item {
+                id: counter,
+                name,
+                price: 1.0,
+                description: String::from("test")
+            };
+            items.push(newItem);
+        };
+        ItemsBank {
+            banks: items
+        }
     }
 }
 
-Player: {
+struct Player {
     name: String,
     backpack: Vec<Item>,
     bargin_pts: i32
