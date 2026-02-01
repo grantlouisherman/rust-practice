@@ -1,0 +1,11 @@
+rpg_shop/target/** 
+rpg_shop/target/debug 
+rpg_shop/target/debug/deps/** 
+rpg_shop/**
+debug/
+bin-rpg_shop
+bin-rpg_shop.d
+**/*.rs.bk
+/target/
+output-bin-rpg_shop
+rpg_shop-*.d
