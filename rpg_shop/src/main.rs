@@ -1,5 +1,5 @@
 
-
+#[derive(Debug, Clone)]
 struct Item {
     id: i32,
     name: String,
@@ -8,7 +8,7 @@ struct Item {
 }
 
 struct ItemsBank {
-    banks: Vec<Item>
+    pub bank: Vec<Item>
 }
 
 impl ItemsBank {
@@ -24,19 +24,30 @@ impl ItemsBank {
                 description: String::from("test")
             };
             items.push(newItem);
+            counter = counter + 1;
         };
         ItemsBank {
-            banks: items
+            bank: items
         }
     }
 }
 
+#[derive(Debug)]
 struct Player {
     name: String,
     backpack: Vec<Item>,
     bargin_pts: i32
 }
 
+impl Player {
+    fn spawn(items: Vec<Item>, name: String) -> Player {
+        Self {
+            name,
+            backpack: items,
+            bargin_pts: 2
+        }
+    }
+}
 
 struct Shop {
     inventory: Vec<Item>
@@ -57,5 +68,10 @@ impl Shop {
 
 
 fn main() {
-    println!("Hello, world!");
+    let bank = ItemsBank::new().bank;
+    let items_for_player = &bank[0..5];
+    print!("LEN --- >{}", items_for_player.len());
+    let items_vec: Vec<Item> = items_for_player.to_vec();
+    let player = Player::spawn(items_vec, String::from("Test Player"));
+    print!("{:?}", player);
 }
