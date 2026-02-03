@@ -96,19 +96,24 @@ fn main() {
     - exit - exit program \n
     - help
     ");
-    print!("{}\n", help_text);
    loop {
-        io::stdin().read_line(&mut input).expect("Failed");
-        let ci = input.trim();
-        //print!("{}\n", ci);
-        if ci == "exit"  {
-            break;
-        }
-        if ci == "help" {
-            print!("{}", help_text);
-            continue;
-        }
-        print!("Command not understood: {}\n", ci);
+        input.clear();
+        match io::stdin().read_line(&mut input) {
+            Ok(_) => {
+               let ci = input.trim();
+                if ci == "help" {
+                    println!("{}", help_text);
+                    continue;
+                }
+                if ci == "exit"  {
+                    break;
+                }
+            }
+            Err(error) => {
+                println!("Error reading input");
+            }
+        } 
+       
     }
 
     print!("\nGame Over\n");
