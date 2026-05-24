@@ -6,6 +6,7 @@ debug/
 bin-rpg_shop
 bin-rpg_shop.d
 **/*.rs.bk
-/target/
+*/target/
 output-bin-rpg_shop
 rpg_shop-*.d
+*/target/.rustc_info.json
