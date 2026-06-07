@@ -10,28 +10,24 @@ impl<T:std::clone::Clone + std::fmt::Display> PriorityQueue<T> {
             queue: q
         }
     }
-    fn swap(&self, q: &mut Vec<T>, parent: usize, child: usize) {
-            let tmp = q[parent].clone();
-            let c = q[child].clone();
-            println!("SWAP: Parent:{tmp}, CHild:{c}");
-            q[parent] = c;
-            q[child] = tmp;
-            println!("{}", q[parent]);
+    fn swap(&mut self, parent: usize, child: usize) {
+            let tmp = self.queue[parent].clone();
+            let c = self.queue[child].clone();
+            self.queue[parent] = c;
+            self.queue[child] = tmp;
 
     }
     pub fn insert(&mut self, value: T) 
     where T: std::cmp::PartialOrd {
-        let mut q = &mut self.queue;
-        q.push(value.clone());
+        self.queue.push(value.clone());
         let mut index = self.queue.len() - 1;
 
-        while index > 0 {
-            let p_idx = ((index-1)).div_euclid(2);
-            let parent = self.queue[p_idx].clone();
-            let child = self.queue[index].clone();
-            println!("Insert Value:{value}\nPIDX:{p_idx}\nParent: {parent}\nChild:{child}\n-----------------\n");
+        while index > 0 && self.queue[((index-1)).div_euclid(2)] > self.queue[index]{
+            let parent = self.queue[index].clone();
+            let child = self.queue[index-1].clone();
+            //println!("Insert Value:{value}\nPIDX:{p_idx}\nParent: {parent}\nChild:{child}\n-----------------\n");
             if parent > child {
-                self.swap(q, p_idx, index);
+                self.swap(p_idx, index);
                 index = p_idx;
                 continue;
             }
